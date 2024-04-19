@@ -21,14 +21,14 @@ func main() {
 	}
 
 	// Get database configuration from environment variables
-	dbHost := os.Getenv("PGHOST")
-	dbPort := os.Getenv("PGPORT")
-	dbUser := os.Getenv("PGUSER")
-	dbPassword := os.Getenv("PGPASSWORD")
-	dbName := os.Getenv("PGDATABASE")
+	// dbHost := os.Getenv("PGHOST")
+	// dbPort := os.Getenv("PGPORT")
+	// dbUser := os.Getenv("PGUSER")
+	// dbPassword := os.Getenv("PGPASSWORD")
+	// dbName := os.Getenv("PGDATABASE")
 
 	// Construct database connection string
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPassword, dbName)
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGDATABASE"))
 
 	// Connect to the database
 	DB, err := sql.Open("postgres", psqlInfo)
