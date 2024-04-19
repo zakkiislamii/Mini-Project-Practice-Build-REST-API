@@ -5,25 +5,23 @@ import (
 	"practice/structs"
 )
 
-func GetAllPerson(db *sql.DB) (err error, results []structs.Person) {
+func GetAllPerson(db *sql.DB) ([]structs.Person, error) {
 	sql := "SELECT * FROM person"
 	rows, err := db.Query(sql)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-
 	defer rows.Close()
+
+	var results []structs.Person
 	for rows.Next() {
 		var person structs.Person
-
-		err = rows.Scan(&person.ID, &person.FirstName, &person.LastName)
-		if err != nil {
-			panic(err)
+		if err := rows.Scan(&person.ID, &person.FirstName, &person.LastName); err != nil {
+			return nil, err
 		}
 		results = append(results, person)
-
 	}
-	return
+	return results, nil
 }
 
 func InsertPerson(db *sql.DB, person structs.Person) (err error) {
