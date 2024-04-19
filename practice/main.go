@@ -21,11 +21,11 @@ func main() {
 	}
 
 	// Get database configuration from environment variables
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	dbHost := os.Getenv("PGHOST")
+	dbPort := os.Getenv("PGPORT")
+	dbUser := os.Getenv("PGUSER")
+	dbPassword := os.Getenv("PGPASSWORD")
+	dbName := os.Getenv("PGDATABASE")
 
 	// Construct database connection string
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPassword, dbName)
@@ -58,5 +58,5 @@ func main() {
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
 	// Start the server
-	router.Run(":8080")
+	router.Run(":", os.Getenv("PORT"))
 }
