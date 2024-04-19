@@ -27,13 +27,13 @@ func GetAllPerson(db *sql.DB) (err error, results []structs.Person) {
 }
 
 func InsertPerson(db *sql.DB, person structs.Person) (err error) {
-	sql := "INSERT INTO person (id, first_name, last_name) VALUES ($1, $2 $3)"
+	sql := "INSERT INTO person (id, first_name, last_name) VALUES ($1, $2, $3)"
 	errs := db.QueryRow(sql, person.ID, person.FirstName, person.LastName)
 	return errs.Err()
 }
 
 func UpdatePerson(db *sql.DB, person structs.Person) (err error) {
-	sql := "UPDATE person SET first_name = $1, last_name = $2 WHERE id = $5"
+	sql := "UPDATE person SET first_name = $1, last_name = $2 WHERE id = $3"
 	errs := db.QueryRow(sql, person.FirstName, person.LastName, person.ID)
 	return errs.Err()
 }
