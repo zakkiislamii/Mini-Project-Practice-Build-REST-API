@@ -58,5 +58,10 @@ func main() {
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
 	// Start the server
-	router.Run(":", os.Getenv("PORT"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default to port 8080 if PORT environment variable is not set
+	}
+	router.Run(":" + port)
+
 }
