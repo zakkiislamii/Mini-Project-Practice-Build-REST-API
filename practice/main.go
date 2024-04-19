@@ -60,7 +60,7 @@ func main() {
 	// Start the server
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080" // Default to port 8080 if PORT environment variable is not set
+		port = "22301" // Default to port 8080 if PORT environment variable is not set
 	}
 	router.Run(":" + port)
 
